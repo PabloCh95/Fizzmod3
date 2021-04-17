@@ -1,4 +1,6 @@
-import fs from 'fs';
+import { readFile } from 'fs/promises';
+import { send } from 'process';
+import pack1 from '../../package.json';
 //controller ejercicio 1:
 //1) Responda en la ruta raíz un mensaje de acuerdo a la hora actual: si dicha hora se encuentra entre
 //las 6 y las 12hs será 'Buenos dias!', entre las 13 y las 19hs 'Buenas tardes!' y de 20 a 5hs 'Buenas
@@ -53,5 +55,10 @@ package.json, preservando el formato de representación del objeto en el archivo
 */
 
 export const info= async(req,res)=>{
-    
+    try{
+        let pack= await readFile('package.json','utf-8')
+        console.log(pack)
+    }catch(error){
+        console.log(error);
+    }
 }
