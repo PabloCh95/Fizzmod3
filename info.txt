@@ -1,0 +1,33 @@
+{
+  "contenidoStr": "{\r\n  \"type\": \"module\",\r\n  \"name\": \"fizzmod3\",\r\n  \"version\": \"1.0.0\",\r\n  \"description\": \"\",\r\n  \"main\": \"server.js\",\r\n  \"scripts\": {\r\n    \"dev\": \"nodemon src/server.js\",\r\n    \"start\": \"node src/server.js\",\r\n    \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\"\r\n  },\r\n  \"repository\": {\r\n    \"type\": \"git\",\r\n    \"url\": \"git+https://github.com/PabloCh95/Fizzmod3.git\"\r\n  },\r\n  \"keywords\": [],\r\n  \"author\": \"\",\r\n  \"license\": \"ISC\",\r\n  \"bugs\": {\r\n    \"url\": \"https://github.com/PabloCh95/Fizzmod3/issues\"\r\n  },\r\n  \"homepage\": \"https://github.com/PabloCh95/Fizzmod3#readme\",\r\n  \"devDependencies\": {\r\n    \"nodemon\": \"^2.0.7\"\r\n  },\r\n  \"dependencies\": {\r\n    \"express\": \"^4.17.1\"\r\n  }\r\n}\r\n",
+  "contenidoObj": {
+    "type": "module",
+    "name": "fizzmod3",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "scripts": {
+      "dev": "nodemon src/server.js",
+      "start": "node src/server.js",
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/PabloCh95/Fizzmod3.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/PabloCh95/Fizzmod3/issues"
+    },
+    "homepage": "https://github.com/PabloCh95/Fizzmod3#readme",
+    "devDependencies": {
+      "nodemon": "^2.0.7"
+    },
+    "dependencies": {
+      "express": "^4.17.1"
+    }
+  },
+  "syze": 683
+}

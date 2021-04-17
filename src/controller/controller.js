@@ -1,6 +1,6 @@
-import { readFile } from 'fs/promises';
-import { send } from 'process';
-import pack1 from '../../package.json';
+
+import {readFile,writeFile} from 'fs/promises';
+
 //controller ejercicio 1:
 //1) Responda en la ruta raíz un mensaje de acuerdo a la hora actual: si dicha hora se encuentra entre
 //las 6 y las 12hs será 'Buenos dias!', entre las 13 y las 19hs 'Buenas tardes!' y de 20 a 5hs 'Buenas
@@ -54,11 +54,20 @@ package.json, preservando el formato de representación del objeto en el archivo
 • Utilizar la lectura y escritura de archivos en modo asincrónico con async await.
 */
 
-export const info= async(req,res)=>{
+export const info= async ()=>{
     try{
-        let pack= await readFile('package.json','utf-8')
-        console.log(pack)
+        let info={}
+        info['contenidoStr']= await readFile('package.json','utf-8')
+        info['contenidoObj']= JSON.parse(info.contenidoStr);
+        info['syze']=info.contenidoStr.length;
+        console.log(info)
+        /*writeFile(path: PathLike | FileHandle, data: string | Uint8Array, options?: (BaseEncodingOptions & {
+            mode?: Mode;
+            flag?: OpenMode;
+        }) | BufferEncoding): Promise<...> */
+        let textInfo= JSON.stringify(info,null,2)
+        await writeFile('info.txt', textInfo )  
     }catch(error){
-        console.log(error);
+        console.log('error:',error);
     }
 }
