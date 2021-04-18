@@ -7,7 +7,7 @@ import {readFile,writeFile} from 'fs/promises';
 //noches!'.
 
 export const ejer1= (req,res)=>{
-    let dato=new Date().getHours();
+    let dato=new Date().getHours();//corroborar la hora en glitch
     if (dato >= 6 && dato <= 12){
     res.send(`<h1>Buenos dias!</h1>`);
     }
@@ -27,7 +27,7 @@ dicho número.
 export const randomNros=(req,res)=>{
     let value={};
     for(let i=0;i<1000;i++){
-        let nro= Math.round(Math.random()*20);
+        let nro= Math.round(Math.random()*20);//cambiar funcion a una que vaya de 1 a 20 , esta va de 0 a 20
         if(nro!=0){
             if(value[nro]>0){
                 value[nro]++;
@@ -94,7 +94,7 @@ dicho repo. Fijar la versión mínima de Node.js para que glitch instale la vers
 funcionen los import de ES Modules.
 */
 export const operaciones=(req,res)=>{
-    try{
+    try{//falta generar el error para que lo capture el catch
         let err = {
             error:{
                 num1: { valor: x, tipo: y },
@@ -104,12 +104,15 @@ export const operaciones=(req,res)=>{
     }
         const {num1,num2,operacion}=req.query;
         let resultado=0;
-        (operacion==="suma")? resultado=num1+num2 : throw new Error(err);
-        (operacion==="resta")? resultado=num1-num2 : throw new Error(err);
-        (operacion==="multiplicación")? resultado=num1*num2 : throw new Error(err);
-        (operacion==="división")? resultado=num1/num2 : throw new Error(err);
-
-        console.log("resultado:",resultado);
+        (operacion==="suma")? resultado=num1+num2 : resultado=null;
+        (operacion==="resta")? resultado=num1-num2 : resultado=null;
+        (operacion==="multiplicación")? resultado=num1*num2 : resultado=null;
+        (operacion==="división")? resultado=num1/num2 : resultado=null;
+        if(resultado===null){
+            throw new Error(err);
+        }else{
+            console.log("resultado:",resultado);
+        }
         
     }catch(err){
         console.log(err)
