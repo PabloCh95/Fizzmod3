@@ -59,7 +59,7 @@ export const info= async ()=>{
         let info={}
         info['contenidoStr']= await readFile('package.json','utf-8')
         info['contenidoObj']= JSON.parse(info.contenidoStr);
-        info['syze']=info.contenidoStr.length;
+        info['size']=info.contenidoStr.length;
         console.log(info)
         /*writeFile(path: PathLike | FileHandle, data: string | Uint8Array, options?: (BaseEncodingOptions & {
             mode?: Mode;
@@ -95,26 +95,37 @@ funcionen los import de ES Modules.
 */
 export const operaciones=(req,res)=>{
     try{//falta generar el error para que lo capture el catch
+        const {num1,num2,operacion}=req.query;
+        console.log(typeof num1)
+        console.log(num2)
         let err = {
             error:{
-                num1: { valor: x, tipo: y },
-                num2: { valor: x, tipo: y },
-                operacion: { valor: x, tipo: y }
+                num1: { valor: num1 || null, tipo: typeof num1 },
+                num2: { valor: num2 || null , tipo: typeof num2 },
+                operacion: { valor: operacion || null, tipo: typeof operacion }
         }
     }
-        const {num1,num2,operacion}=req.query;
+        
         let resultado=0;
-        (operacion==="suma")? resultado=num1+num2 : resultado=null;
-        (operacion==="resta")? resultado=num1-num2 : resultado=null;
-        (operacion==="multiplicación")? resultado=num1*num2 : resultado=null;
-        (operacion==="división")? resultado=num1/num2 : resultado=null;
+        /*(operacion=="suma")?  resultado=parseInt(num1)+parseInt(num2):resultado=null;
+        (operacion==="resta")? resultado=parseInt(num1)-parseInt(num2) : resultado=null;
+        (operacion==="multiplicación")?  resultado=parseInt(num1)*parseInt(num2) : resultado=null;
+        //(operacion==="división")?  resultado=null:resultado=num1/num2;*/
+        switch(operacion){
+            case "suma": resultado=parseInt(num1)+parseInt(num2); break;
+            case "resta": resultado= parseInt(num1)-parseInt(num2); break;
+            case "multiplicación": resultado=parseInt(num1)*parseInt(num2); break;
+            case "división": resultado=parseInt(num1)/parseInt(num2); break;
+            default: resultado=null;
+        }
+        console.log(typeof resultado)
         if(resultado===null){
-            throw new Error(err);
+            throw new Error(JSON.parse(err));
         }else{
             console.log("resultado:",resultado);
         }
         
     }catch(err){
-        console.log(err)
+        console.log(typeof err);
     }
 }
