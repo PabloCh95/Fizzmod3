@@ -96,36 +96,41 @@ funcionen los import de ES Modules.
 export const operaciones=(req,res)=>{
     try{//falta generar el error para que lo capture el catch
         const {num1,num2,operacion}=req.query;
-        console.log(typeof num1)
-        console.log(num2)
+        const x=parseInt(num1);
+        const y=parseInt(num2);
         let err = {
             error:{
-                num1: { valor: num1 || null, tipo: typeof num1 },
-                num2: { valor: num2 || null , tipo: typeof num2 },
+                num1: { valor: x || null, tipo: typeof x},
+                num2: { valor: y || null , tipo: typeof y },
                 operacion: { valor: operacion || null, tipo: typeof operacion }
         }
-    }
-        
-        let resultado=0;
-        /*(operacion=="suma")?  resultado=parseInt(num1)+parseInt(num2):resultado=null;
-        (operacion==="resta")? resultado=parseInt(num1)-parseInt(num2) : resultado=null;
-        (operacion==="multiplicación")?  resultado=parseInt(num1)*parseInt(num2) : resultado=null;
-        //(operacion==="división")?  resultado=null:resultado=num1/num2;*/
-        switch(operacion){
-            case "suma": resultado=parseInt(num1)+parseInt(num2); break;
-            case "resta": resultado= parseInt(num1)-parseInt(num2); break;
-            case "multiplicación": resultado=parseInt(num1)*parseInt(num2); break;
-            case "división": resultado=parseInt(num1)/parseInt(num2); break;
-            default: resultado=null;
         }
-        console.log(typeof resultado)
-        if(resultado===null){
-            throw new Error(JSON.parse(err));
+        console.log(isNaN(x));
+        let resultado={};
+        if(!isNaN(x)&&!isNaN(y)){
+            switch(operacion){
+                case "suma": resultado['resultado']=x+y; break;
+                case "resta": resultado['resultado']= x-y; break;
+                case "multiplicación": resultado['resultado']=x*y; break;
+                case "división": resultado['resultado']=x/y; break;
+                default: resultado['resultado']=null;
+            }
+            if(resultado['resultado']===null){
+                throw new Error(JSON.stringify(err));
+            }else{
+                resultado['num1']=x;
+                resultado['num2']=y;
+                resultado['operacion']=operacion;
+                
+                console.log('objeto con los datos y resultados correctos:',resultado)
+                res.send(resultado)
+            }
         }else{
-            console.log("resultado:",resultado);
+            throw new Error(JSON.stringify(err));
         }
         
     }catch(err){
-        console.log(typeof err);
+        console.log(JSON.parse(err.message));
+        res.send(JSON.parse(err.message));
     }
 }
