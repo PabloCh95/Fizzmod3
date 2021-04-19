@@ -54,13 +54,14 @@ package.json, preservando el formato de representación del objeto en el archivo
 • Utilizar la lectura y escritura de archivos en modo asincrónico con async await.
 */
 
-export const info= async ()=>{
+export const info= async (req,res)=>{
     try{
         let info={}
         info['contenidoStr']= await readFile('package.json','utf-8')
         info['contenidoObj']= JSON.parse(info.contenidoStr);
         info['size']=info.contenidoStr.length;
         console.log(info)
+        res.send(info)
         /*writeFile(path: PathLike | FileHandle, data: string | Uint8Array, options?: (BaseEncodingOptions & {
             mode?: Mode;
             flag?: OpenMode;

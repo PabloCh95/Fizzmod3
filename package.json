@@ -13,6 +13,10 @@
     "type": "git",
     "url": "git+https://github.com/PabloCh95/Fizzmod3.git"
   },
+  "engines": {
+    "node": ">=14.0.0",
+    "express": ">=4.0.0"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
